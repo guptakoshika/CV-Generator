@@ -3,7 +3,7 @@
 #### On the main screen their are 3 options givern to the user i.e.
 * save (will save all the enterd info the database)
 * generate pdf (will generate a pdf for cv with the user name as file name and it will be send as mail to the user.)
-* clear ( will clear all the information thta is already enterd by user)
+* clear ( will clear all the information that is already enterd by user)
 ###### On the top of the screen their is a search option provided where user can search the info in the database.On key release by th help of the information provided by the user the form will be filled up according to the information provided at the time of saving the form.
 #### JAVA Goodies
 - Hibernate (for database conectivity)
