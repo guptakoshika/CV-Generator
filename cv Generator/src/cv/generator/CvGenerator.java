@@ -15,7 +15,7 @@ public class CvGenerator {
         void createpdf(cv t)
     {
         
-      String to = "koshikaje@gmail.com";
+      String to = t.getEmail();
 
       // Sender's email ID needs to be mentioned
       String from = "koshikaje@gmail.com";
@@ -62,20 +62,26 @@ public class CvGenerator {
         mydoc.add(new Paragraph(t.getAdress1()));
         mydoc.add(new Paragraph(t.getAddress2()));
         
+        qualifications q = new qualifications();
+        t.setQual(q);
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
         mydoc.add(new Paragraph("QUALIFICATIONS"));
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
         mydoc.add(new Paragraph("University Name------"+t.getUnivname()));
-        mydoc.add(new Paragraph(t.getQ1()));
-        mydoc.add(new Paragraph(t.getQ2()));
+        mydoc.add(new Paragraph(q.getQ1()));
+        mydoc.add(new Paragraph(q.getQ2()));
         
+        skills s = new skills();
+        t.setSkill(s);
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
         mydoc.add(new Paragraph("SKILLS"));
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph(t.getSkill1()));
-        mydoc.add(new Paragraph(t.getSkill2()));
-        mydoc.add(new Paragraph(t.getSkill3()));
+        mydoc.add(new Paragraph(s.getSkill1()));
+        mydoc.add(new Paragraph(s.getSkill2()));
+        mydoc.add(new Paragraph(s.getSkill3()));
         
+        workexperience w = new workexperience();
+        t.setWork(w);
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
         mydoc.add(new Paragraph("WORK EXPERIENCE"));
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
@@ -97,13 +103,13 @@ public class CvGenerator {
          message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
 
          // Set Subject: header field
-         message.setSubject("This is the Subject Line!");
+         message.setSubject("Thank you for using CV Generator!");
 
          // Create the message part 
          BodyPart messageBodyPart = new MimeBodyPart();
 
          // Fill the message
-         messageBodyPart.setText("This is message body");
+         messageBodyPart.setText("Here is your CV! please find the attachment enclosed!");
          
          // Create a multipar message
          Multipart multipart = new MimeMultipart();
