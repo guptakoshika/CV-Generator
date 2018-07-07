@@ -10,3 +10,4 @@
 - JFrame
 - itextpdf writer jar files
 - mail sending jar files
+- Emembeded and entity annotations
