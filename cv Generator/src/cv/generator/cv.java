@@ -18,7 +18,9 @@ public class cv {
      private String dob;
      private String contact;
      private String email;
-
+     @Lob
+     private byte[] image;
+    
      //@Embedded 
      private skills skill;
      private workexperience work;
@@ -56,8 +58,6 @@ public class cv {
         this.image = image;
     }
     
-     @Lob
-     private byte[] image;
     public int getId() {
         return id;
     }
