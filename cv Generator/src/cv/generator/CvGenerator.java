@@ -1,67 +1,74 @@
 package cv.generator;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
 import java.io.FileOutputStream;
 import java.util.Properties;
 import javax.activation.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.*;
+
 public class CvGenerator {
-        void createpdf(cv t)
+        void createpdf(cv t,String path)
     {
         Document  mydoc = new Document();
-        PdfWriter p;
         try {
             
-        p = PdfWriter.getInstance(mydoc,new FileOutputStream
-            ("C:\\Users\\Koshika Gupta\\Desktop\\"+t.getFname()+".pdf"));
+        PdfWriter.getInstance(mydoc,new FileOutputStream
+            ("C:\\Users\\Koshika Gupta\\Desktop\\java\\"+t.getFname()+".pdf"));
       
+        Font font = new Font(Font.FontFamily.HELVETICA, 27 , Font.BOLD);
         mydoc.open();
-         //Image img = Image.getInstance(t.getImage());
-        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph("PERSONAL INFORMATION"));
-        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
+         Image image = Image.getInstance(path);
+         image.setAbsolutePosition(500f, 650f);
+        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------------"));
+        mydoc.add(new Paragraph("PERSONAL INFORMATION",font));
+        mydoc.add(new Paragraph("------------------------------------------------------------------------------------------------"));
         
         mydoc.add(new Paragraph(t.getFname()+t.getSname()));
         mydoc.add(new Paragraph(t.getContact()));
         mydoc.add(new Paragraph(t.getEmail()));
         mydoc.add(new Paragraph(t.getAdress1()));
         mydoc.add(new Paragraph(t.getAddress2()));
-        //mydoc.add(img);
+        mydoc.add(image);
         
-        qualifications q;
-            q = new qualifications();
+        qualifications q = new qualifications();
         q = t.getQual();
-        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph("QUALIFICATIONS"));
-        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph("University Name------"+q.getUnivname()));
+        mydoc.add(new Paragraph("-------------------------------------------------------------------------------------------------"));
+        mydoc.add(new Paragraph("QUALIFICATIONS",font));
+        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------------"));
+        mydoc.add(new Paragraph(q.getUnivname()));
         mydoc.add(new Paragraph(q.getQ1()));
         mydoc.add(new Paragraph(q.getQ2()));
         
         skills s = new skills();
         s = t.getSkill();
+         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------------"));
+        mydoc.add(new Paragraph("SKILLS",font));
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph("SKILLS"));
-        mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph(s.getSkill1()));
-        mydoc.add(new Paragraph(s.getSkill2()));
-        mydoc.add(new Paragraph(s.getSkill3()));
-        
+            PdfPTable table = new PdfPTable(2); 
+
+            PdfPCell cell1 = new PdfPCell(new Paragraph(s.getSkill1()));
+            PdfPCell cell2 = new PdfPCell(new Paragraph(s.getSkill2()));
+            
+            table.addCell(cell1);
+            table.addCell(cell2);
+            mydoc.add(table);
+            PdfPCell cell3 = new PdfPCell(new Paragraph(s.getSkill3()));
+            PdfPCell cell4 = new PdfPCell(new Paragraph(s.getSkill4()));
+            mydoc.add(table);
+       
         workexperience w = new workexperience();
         w = t.getWork();
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph("WORK EXPERIENCE"));
+        mydoc.add(new Paragraph("WORK EXPERIENCE",font));
         mydoc.add(new Paragraph("----------------------------------------------------------------------------------------"));
-        mydoc.add(new Paragraph("COMPANY NAME------"+w.getCn1()));
-        mydoc.add(new Paragraph("WORK DONE------"+w.getWd1()));
-        mydoc.add(new Paragraph("COMPANY NAME------"+w.getCn2()));
-        mydoc.add(new Paragraph("WORK DONE ------"+w.getWd2()));
-        mydoc.add(new Paragraph("COMPANY NAME------"+w.getCn3()));
-        mydoc.add(new Paragraph("WORK DONE------"+w.getWd3()));
+        mydoc.add(new Paragraph(w.getCn1()));
+        mydoc.add(new Paragraph(w.getWd1()));
+        mydoc.add(new Paragraph(w.getCn2()));
+        mydoc.add(new Paragraph(w.getWd2()));
+        mydoc.add(new Paragraph(w.getCn3()));
+        mydoc.add(new Paragraph(w.getWd3()));
         mydoc.close();
         System.out.println("done! pdf created");
         sendmail(t);
@@ -76,7 +83,7 @@ public class CvGenerator {
                 String to = "koshikaje@gmail.com";
                 
                 // Sender's email ID needs to be mentioned
-                String from = "koshikaje@gmail.com";
+                String from = "koshika@gmail.com";
                 
                 // Assuming you are sending email from localhost
                 String host = "465";
@@ -125,7 +132,7 @@ public class CvGenerator {
                 // Set text message part
                 multipart.addBodyPart(messageBodyPart);
                 messageBodyPart = new MimeBodyPart();
-                String filename = "C:\\Users\\Koshika Gupta\\Desktop\\"+t.getFname()+".pdf";
+                String filename = "C:\\Users\\Koshika Gupta\\Desktop\\java\\"+t.getFname()+".pdf";
                 String filename1 = t.getFname();
                 DataSource source = new FileDataSource(filename);
                 messageBodyPart.setDataHandler(new DataHandler(source));
