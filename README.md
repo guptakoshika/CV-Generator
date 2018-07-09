@@ -12,4 +12,4 @@
 - mail sending jar files
 - Emembeded and entity annotations
 
-![alt text](C:\Users\Koshika Gupta\OneDrive\Pictures\Screenshots/2018-07-09.png )
+![2018-07-09](https://user-images.githubusercontent.com/32263097/42430209-5c5177d0-835b-11e8-96a5-eb284aa8ae0b.png)
