@@ -2,19 +2,18 @@ package cv.generator;
 
 import ae.java.awt.image.BufferedImage;
 import ae.javax.imageio.ImageIO;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class mainscreen extends javax.swing.JFrame {
 
@@ -60,7 +59,6 @@ public class mainscreen extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         wd1 = new javax.swing.JTextField();
         cn1 = new javax.swing.JTextField();
@@ -82,6 +80,7 @@ public class mainscreen extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         imagelabel = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -99,6 +98,11 @@ public class mainscreen extends javax.swing.JFrame {
 
         searchcv_label.setText("Search CV");
 
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
         search.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchKeyReleased(evt);
@@ -162,8 +166,6 @@ public class mainscreen extends javax.swing.JFrame {
 
         jLabel17.setText("Company Name");
 
-        jLabel18.setText("Work Done");
-
         jLabel20.setText("Company Name");
 
         jLabel21.setText("Work Done");
@@ -213,6 +215,13 @@ public class mainscreen extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Generate excel");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -241,7 +250,7 @@ public class mainscreen extends javax.swing.JFrame {
                                     .addComponent(q1)
                                     .addComponent(q2)))
                             .addComponent(Search_label, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 824, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -268,11 +277,10 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
                             .addComponent(jLabel19))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
-                            .addComponent(jLabel18)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -296,7 +304,6 @@ public class mainscreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton2)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cn2)
@@ -310,8 +317,10 @@ public class mainscreen extends javax.swing.JFrame {
                                                 .addGap(242, 242, 242)
                                                 .addComponent(jButton4))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(230, 230, 230)
-                                                .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                                .addGap(102, 102, 102)
+                                                .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jButton5)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(152, 152, 152))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchcv_label)
@@ -324,42 +333,39 @@ public class mainscreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Search_label, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchcv_label)
+                            .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(searchcv_label)
-                                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(fnmae_label)
+                                    .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel13))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(fnmae_label)
-                                            .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel5)
-                                            .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(skill1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(skill2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(skill3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(skill4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(5, 5, 5)
+                                    .addComponent(jLabel5)
+                                    .addComponent(sname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(add1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14)))
-                            .addComponent(jLabel18))
+                                    .addComponent(skill1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(skill2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(skill3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(skill4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(add1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -372,9 +378,7 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(wd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -409,23 +413,25 @@ public class mainscreen extends javax.swing.JFrame {
                         .addComponent(jLabel21)
                         .addComponent(wd3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
-                .addComponent(jLabel19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(univname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
-                    .addComponent(jButton1))
+                    .addComponent(jButton2))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(q1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton5))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(q2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -442,25 +448,28 @@ public class mainscreen extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
          cv o = getdata();
         CvGenerator c = new CvGenerator();
-        c.createpdf(o);         
+        c.createpdf(o,path);         
     }                                        
   
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        cv o = getdata();
-        File file = new File(path);
-        byte[] bFile = new byte[(int) file.length()];
+        int i = validatedata();
+        if(i==0)
+        {
+            cv o = getdata();
+            File file = new File(path);
+            byte[] bFile = new byte[(int) file.length()];
         
         try {
-	     FileInputStream fileInputStream = new FileInputStream(file);
-	     fileInputStream.read(bFile);
-	     fileInputStream.close();
-        } catch (Exception e) {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                fileInputStream.read(bFile);
+                fileInputStream.close();
+        }   catch (Exception e) {
 	     e.printStackTrace();
-        }   
-        o.setImage(bFile);
-        dbconnect d = new dbconnect();
-        d.savedata(o);
-        //System.out.println(path);
+            }   
+                o.setImage(bFile);
+                dbconnect d = new dbconnect();
+                d.savedata(o);
+        }
     }                                        
 
     private void dobActionPerformed(java.awt.event.ActionEvent evt) {                                    
@@ -514,6 +523,7 @@ public class mainscreen extends javax.swing.JFrame {
             cv c = new cv();
             c = d.fetch(n);
             skills s = new skills();
+            
             //personal info
             contact.setText(c.getContact());
             dob.setText(c.getDob());
@@ -527,14 +537,16 @@ public class mainscreen extends javax.swing.JFrame {
             
             workexperience w = new workexperience();
             //work experience
+            c.setWork(w);
             cn1.setText(w.getCn1());
             cn2.setText(w.getCn2());
             cn3.setText(w.getCn3());
             wd1.setText(w.getWd1());
             wd2.setText(w.getWd2());
             wd3.setText(w.getWd3());
-            
+                        
             //skills
+            c.setSkill(s);
             skill1.setText(s.getSkill1());
             skill2.setText(s.getSkill2());
             skill3.setText(s.getSkill3());
@@ -542,6 +554,7 @@ public class mainscreen extends javax.swing.JFrame {
             
             //qualification
             qualifications q = new qualifications();
+            c.setQual(q);
             univname.setText(q.getUnivname());
             q1.setText(q.getQ1());
             q2.setText(q.getQ2());
@@ -566,8 +579,16 @@ public class mainscreen extends javax.swing.JFrame {
        ImageIcon icon = new ImageIcon(i); 
        //JLabel image = new JLabel();
        imagelabel.setIcon(icon);
-       imagelabel.setBounds(1060,120,255,175);
+       imagelabel.setBounds(1060,120,309,246);
        add(imagelabel);
+    }                                        
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        new login().setVisible(true);
     }                                        
 
     public static void main(String args[]) {
@@ -576,6 +597,24 @@ public class mainscreen extends javax.swing.JFrame {
                 new mainscreen().setVisible(true);
             }
         });
+    }
+    int validatedata()
+    {
+        if(fname.getText() == null || 
+              sname.getText() == null || add1.getText() == null || 
+                add2.getText() == null || 
+                nationality.getText() == null || 
+                contact.getText() == null ||   
+                email.getText() == null || postcode.getText() == null )
+        {
+            JFrame frame = new JFrame();
+            //frame.setSize(new Dimension(480, 10));
+            //frame.setPreferredSize(new Dimension(480, frame.getPreferredSize().height));
+              JOptionPane.showMessageDialog(
+                   frame, "Invalid Credentials!! Please Check and try "); 
+              return 1;
+        }
+        return 0;
     }
 cv getdata()
 {
@@ -590,12 +629,14 @@ cv getdata()
          o.setDob(dob.getText());
          o.setPostcode(postcode.getText());
          o.setEmail(email.getText());
+         
          //skills
          skills s = new skills();
          s.setSkill1(skill1.getText());
          s.setSkill2(skill2.getText());
          s.setSkill3(skill3.getText());
          s.setSkill4(skill4.getText());
+         
         //workexperience
         workexperience w = new workexperience();
         w.setCn1(cn1.getText());
@@ -610,8 +651,11 @@ cv getdata()
         q.setUnivname(univname.getText());
         q.setQ1(q1.getText());
         q.setQ2(q2.getText());
-        //image 
         
+         
+        o.setSkill(s);
+        o.setWork(w);
+        o.setQual(q);
         return o;
 }
     // Variables declaration - do not modify                     
@@ -631,6 +675,7 @@ cv getdata()
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -639,7 +684,6 @@ cv getdata()
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
