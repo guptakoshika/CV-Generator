@@ -1,19 +1,14 @@
 package cv.generator;
 
+import Screens.workexperience;
 import ae.java.awt.image.BufferedImage;
 import ae.javax.imageio.ImageIO;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import java.awt.*;
+import java.io.*;
+import javax.swing.*;
 
 public class mainscreen extends javax.swing.JFrame {
 
@@ -28,6 +23,8 @@ public class mainscreen extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         Search_label = new javax.swing.JLabel();
         searchcv_label = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
@@ -81,15 +78,34 @@ public class mainscreen extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         imagelabel = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -222,14 +238,6 @@ public class mainscreen extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -279,19 +287,6 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(jLabel19))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(skill3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(skill1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(skill4, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                                    .addComponent(skill2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel16)
@@ -304,6 +299,8 @@ public class mainscreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton2)
+                                    .addComponent(jButton5)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(cn2)
@@ -313,15 +310,27 @@ public class mainscreen extends javax.swing.JFrame {
                                             .addComponent(wd3, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                                             .addComponent(wd2))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(106, 106, 106))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(242, 242, 242)
-                                                .addComponent(jButton4))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(102, 102, 102)
-                                                .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(152, 152, 152))
+                                                .addGap(226, 226, 226)
+                                                .addComponent(jButton4)
+                                                .addGap(222, 222, 222))))))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(skill3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(skill1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(skill4, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                                    .addComponent(skill2)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchcv_label)
                         .addGap(39, 39, 39)
@@ -334,12 +343,12 @@ public class mainscreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Search_label, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchcv_label)
+                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(searchcv_label)
-                            .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel13))
@@ -377,14 +386,14 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(jLabel16)
                             .addComponent(wd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(nationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17)))
                     .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(nationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -394,16 +403,14 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(jLabel10)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jButton4)))
+                        .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
-                        .addComponent(cn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4))
                     .addComponent(jLabel20))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,57 +438,74 @@ public class mainscreen extends javax.swing.JFrame {
                     .addComponent(jLabel25)
                     .addComponent(q2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>                        
 
     private void add1ActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        
+
     }                                    
 
     private void wd2ActionPerformed(java.awt.event.ActionEvent evt) {                                    
-        
+
     }                                   
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-         cv o = getdata();
+        JFileChooser j = new JFileChooser();
+        j.showOpenDialog(null);
+        File f = j.getSelectedFile();
+        String pdfpath = f.getAbsolutePath();
+        cv o = getdata();
         CvGenerator c = new CvGenerator();
-        c.createpdf(o,path);         
+        int r = c.createpdf(o, imagepath, pdfpath);
+        if (r == 1) {
+            JOptionPane.showMessageDialog(
+                    null, "Pdf created and mailed it you successfully!\n" + "pdf is created at location"
+                    + pdfpath + "mail is sent to" + o.getEmail());
+        } else {
+            JOptionPane.showMessageDialog(
+                    null, "Something went wrong please try again!");
+
+        }
     }                                        
-  
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        int i = validatedata();
-        if(i==0)
-        {
+        int i = this.validatedata();
+        System.out.println("Returning value===>" + i);
+        if (i == 1) {
             cv o = getdata();
-            File file = new File(path);
+            File file = new File(imagepath);
             byte[] bFile = new byte[(int) file.length()];
-        
-        try {
+
+            try {
                 FileInputStream fileInputStream = new FileInputStream(file);
                 fileInputStream.read(bFile);
                 fileInputStream.close();
-        }   catch (Exception e) {
-	     e.printStackTrace();
-            }   
-                o.setImage(bFile);
-                dbconnect d = new dbconnect();
-                d.savedata(o);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            o.setImage(bFile);
+            dbconnect d = new dbconnect();
+            d.savedata(o);
+        } else {
+            //System.out.println("jkfhsgjkhdfjlkhsfdgjkhsdfjlkg");
+            JOptionPane.showMessageDialog(
+                    null, "Invalid Credentials!! Please Check and try ");
         }
     }                                        
 
     private void dobActionPerformed(java.awt.event.ActionEvent evt) {                                    
-       
+
     }                                   
 
     private void skill3ActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        
+
     }                                      
 
     private void skill2ActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        
+
     }                                      
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -495,7 +519,7 @@ public class mainscreen extends javax.swing.JFrame {
         email.setText("");
         fname.setText("");
         sname.setText("");
-        nationality.setText("");    
+        nationality.setText("");
         postcode.setText("");
         skill1.setText("");
         skill2.setText("");
@@ -516,14 +540,14 @@ public class mainscreen extends javax.swing.JFrame {
     }                                        
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {                                   
-       
+
         try {
-            int n =Integer.parseInt(search.getText());
+            int n = Integer.parseInt(search.getText());
             dbconnect d = new dbconnect();
             cv c = new cv();
             c = d.fetch(n);
             skills s = new skills();
-            
+
             //personal info
             contact.setText(c.getContact());
             dob.setText(c.getDob());
@@ -534,7 +558,7 @@ public class mainscreen extends javax.swing.JFrame {
             add2.setText(c.getAddress2());
             nationality.setText(c.getNationality());
             postcode.setText(c.getPostcode());
-            
+
             workexperience w = new workexperience();
             //work experience
             c.setWork(w);
@@ -544,43 +568,43 @@ public class mainscreen extends javax.swing.JFrame {
             wd1.setText(w.getWd1());
             wd2.setText(w.getWd2());
             wd3.setText(w.getWd3());
-                        
+
             //skills
             c.setSkill(s);
             skill1.setText(s.getSkill1());
             skill2.setText(s.getSkill2());
             skill3.setText(s.getSkill3());
             skill4.setText(s.getSkill4());
-            
+
             //qualification
             qualifications q = new qualifications();
             c.setQual(q);
             univname.setText(q.getUnivname());
             q1.setText(q.getQ1());
             q2.setText(q.getQ2());
-            
+
             InputStream in = new ByteArrayInputStream(c.getImage());
             BufferedImage image = ImageIO.read(in);
             System.out.println(in);
             imagelabel.setIcon((Icon) image);
         } catch (Exception ex) {
-                ex.printStackTrace();
+            ex.printStackTrace();
         }
     }                                  
-        String path;
+    String imagepath;
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         JFileChooser j = new JFileChooser();
         j.showOpenDialog(null);
         File f = j.getSelectedFile();
-        path = f.getAbsolutePath();
-       Toolkit t = Toolkit.getDefaultToolkit();
-       Image i = t.getImage(path);
-       ImageIcon icon = new ImageIcon(i); 
-       //JLabel image = new JLabel();
-       imagelabel.setIcon(icon);
-       imagelabel.setBounds(1060,120,309,246);
-       add(imagelabel);
+        imagepath = f.getAbsolutePath();
+        Toolkit t = Toolkit.getDefaultToolkit();
+        Image i = t.getImage(imagepath);
+        ImageIcon icon = new ImageIcon(i);
+        //JLabel image = new JLabel();
+        imagelabel.setIcon(icon);
+        imagelabel.setBounds(1000, 120, 309, 246);
+        add(imagelabel);
     }                                        
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {                                       
@@ -588,55 +612,64 @@ public class mainscreen extends javax.swing.JFrame {
     }                                      
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        new login().setVisible(true);
+        try {
+            // new login().setVisible(true);
+            excelsheet e = new excelsheet();
+            JFileChooser j = new JFileChooser();
+            j.showOpenDialog(null);
+            File f = j.getSelectedFile();
+            String excelpath = f.getAbsolutePath();
+            int r = e.createexcel(null);
+            if (r == 1) {
+                JOptionPane.showMessageDialog(
+                        null, "excel sheet is created successfully\n" + "Excel is created at location"
+                        + excelpath);
+            } else {
+                JFrame frame = new JFrame();
+                frame.setSize(new Dimension(480, 10));
+                frame.setPreferredSize(new Dimension(480, frame.getPreferredSize().height));
+                JOptionPane.showMessageDialog(
+                        frame, "Invalid Credentials!! Please Check and try again!");
+            }
+        } catch (Exception ex) {
+            //Logger.getLogger(mainscreen.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
     }                                        
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new mainscreen().setVisible(true);
-            }
-        });
-    }
-    int validatedata()
-    {
-        if(fname.getText() == null || 
-              sname.getText() == null || add1.getText() == null || 
-                add2.getText() == null || 
-                nationality.getText() == null || 
-                contact.getText() == null ||   
-                email.getText() == null || postcode.getText() == null )
-        {
-            JFrame frame = new JFrame();
-            //frame.setSize(new Dimension(480, 10));
-            //frame.setPreferredSize(new Dimension(480, frame.getPreferredSize().height));
-              JOptionPane.showMessageDialog(
-                   frame, "Invalid Credentials!! Please Check and try "); 
-              return 1;
+    int validatedata() {
+        //System.out.println("Iam in Validate data");
+        if (fname.getText() == null
+                && sname.getText() == null && add1.getText() == null
+                && add2.getText() == null
+                && nationality.getText() == null
+                && contact.getText() == null
+                && email.getText() == null && postcode.getText() == null) {
+            return 0;
         }
-        return 0;
+        return 1;
     }
-cv getdata()
-{
-     cv o = new cv();
+
+    cv getdata() {
+        cv o = new cv();
         //personal details
-         o.setFname(fname.getText());
-         o.setSname(sname.getText());
-         o.setAdress1(add1.getText());
-         o.setAddress2(add2.getText());
-         o.setNationality(nationality.getText());
-         o.setContact(contact.getText());
-         o.setDob(dob.getText());
-         o.setPostcode(postcode.getText());
-         o.setEmail(email.getText());
-         
-         //skills
-         skills s = new skills();
-         s.setSkill1(skill1.getText());
-         s.setSkill2(skill2.getText());
-         s.setSkill3(skill3.getText());
-         s.setSkill4(skill4.getText());
-         
+        o.setFname(fname.getText());
+        o.setSname(sname.getText());
+        o.setAdress1(add1.getText());
+        o.setAddress2(add2.getText());
+        o.setNationality(nationality.getText());
+        o.setContact(contact.getText());
+        o.setDob(dob.getText());
+        o.setPostcode(postcode.getText());
+        o.setEmail(email.getText());
+
+        //skills
+        skills s = new skills();
+        s.setSkill1(skill1.getText());
+        s.setSkill2(skill2.getText());
+        s.setSkill3(skill3.getText());
+        s.setSkill4(skill4.getText());
+
         //workexperience
         workexperience w = new workexperience();
         w.setCn1(cn1.getText());
@@ -645,19 +678,18 @@ cv getdata()
         w.setWd1(wd1.getText());
         w.setWd2(wd2.getText());
         w.setWd3(wd3.getText());
-        
+
         //qualifications
         qualifications q = new qualifications();
         q.setUnivname(univname.getText());
         q.setQ1(q1.getText());
         q.setQ2(q2.getText());
-        
-         
+
         o.setSkill(s);
         o.setWork(w);
         o.setQual(q);
         return o;
-}
+    }
     // Variables declaration - do not modify                     
     private javax.swing.JLabel Search_label;
     private javax.swing.JTextField add1;
@@ -676,6 +708,8 @@ cv getdata()
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -697,11 +731,8 @@ cv getdata()
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JTextField nationality;
     private javax.swing.JTextField postcode;
