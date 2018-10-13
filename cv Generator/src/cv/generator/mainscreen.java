@@ -133,6 +133,12 @@ public class mainscreen extends javax.swing.JFrame {
 
         jLabel7.setText("Adress Line2");
 
+        fname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnameActionPerformed(evt);
+            }
+        });
+
         add1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add1ActionPerformed(evt);
@@ -634,6 +640,10 @@ public class mainscreen extends javax.swing.JFrame {
         }
     }                                        
 
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+    }                                     
+
     int validatedata() {
         //System.out.println("Iam in Validate data");
         if (fname.getText() == null
@@ -650,37 +660,37 @@ public class mainscreen extends javax.swing.JFrame {
     cv getdata() {
         cv o = new cv();
         //personal details
-        o.setFname(fname.getText());
-        o.setSname(sname.getText());
-        o.setAdress1(add1.getText());
-        o.setAddress2(add2.getText());
-        o.setNationality(nationality.getText());
-        o.setContact(contact.getText());
-        o.setDob(dob.getText());
-        o.setPostcode(postcode.getText());
-        o.setEmail(email.getText());
+        o.setFname(fname.getText().trim());
+        o.setSname(sname.getText().trim());
+        o.setAdress1(add1.getText().trim());
+        o.setAddress2(add2.getText().trim());
+        o.setNationality(nationality.getText().trim());
+        o.setContact(contact.getText().trim());
+        o.setDob(dob.getText().trim());
+        o.setPostcode(postcode.getText().trim());
+        o.setEmail(email.getText().trim());
 
         //skills
         skills s = new skills();
-        s.setSkill1(skill1.getText());
-        s.setSkill2(skill2.getText());
-        s.setSkill3(skill3.getText());
-        s.setSkill4(skill4.getText());
+        s.setSkill1(skill1.getText().trim());
+        s.setSkill2(skill2.getText().trim());
+        s.setSkill3(skill3.getText().trim());
+        s.setSkill4(skill4.getText().trim());
 
         //workexperience
         workexperience w = new workexperience();
-        w.setCn1(cn1.getText());
-        w.setCn2(cn2.getText());
-        w.setCn3(cn3.getText());
-        w.setWd1(wd1.getText());
-        w.setWd2(wd2.getText());
-        w.setWd3(wd3.getText());
+        w.setCn1(cn1.getText().trim());
+        w.setCn2(cn2.getText().trim());
+        w.setCn3(cn3.getText().trim());
+        w.setWd1(wd1.getText().trim());
+        w.setWd2(wd2.getText().trim());
+        w.setWd3(wd3.getText().trim());
 
         //qualifications
         qualifications q = new qualifications();
-        q.setUnivname(univname.getText());
-        q.setQ1(q1.getText());
-        q.setQ2(q2.getText());
+        q.setUnivname(univname.getText().trim());
+        q.setQ1(q1.getText().trim());
+        q.setQ2(q2.getText().trim());
 
         o.setSkill(s);
         o.setWork(w);
