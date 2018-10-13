@@ -3,9 +3,6 @@ package cv.generator;
 import Screens.workexperience;
 import ae.java.awt.image.BufferedImage;
 import ae.javax.imageio.ImageIO;
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
@@ -285,7 +282,7 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
                             .addComponent(jLabel19))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addGap(181, 181, 181)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,8 +308,8 @@ public class mainscreen extends javax.swing.JFrame {
                                             .addComponent(wd2))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(148, 148, 148)
+                                                .addComponent(imagelabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGap(106, 106, 106))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(226, 226, 226)
@@ -393,7 +390,7 @@ public class mainscreen extends javax.swing.JFrame {
                             .addComponent(nationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17)))
-                    .addComponent(imagelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagelabel, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -438,7 +435,7 @@ public class mainscreen extends javax.swing.JFrame {
                     .addComponent(jLabel25)
                     .addComponent(q2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(130, 130, 130))
         );
 
         pack();
@@ -458,7 +455,7 @@ public class mainscreen extends javax.swing.JFrame {
         File f = j.getSelectedFile();
         String pdfpath = f.getAbsolutePath();
         cv o = getdata();
-        CvGenerator c = new CvGenerator();
+        PdfGenerator c =  new PdfGenerator();
         int r = c.createpdf(o, imagepath, pdfpath);
         if (r == 1) {
             JOptionPane.showMessageDialog(
@@ -561,7 +558,7 @@ public class mainscreen extends javax.swing.JFrame {
 
             workexperience w = new workexperience();
             //work experience
-            c.setWork(w);
+            w = c.getWork();
             cn1.setText(w.getCn1());
             cn2.setText(w.getCn2());
             cn3.setText(w.getCn3());
@@ -570,7 +567,7 @@ public class mainscreen extends javax.swing.JFrame {
             wd3.setText(w.getWd3());
 
             //skills
-            c.setSkill(s);
+           s =  c.getSkill();
             skill1.setText(s.getSkill1());
             skill2.setText(s.getSkill2());
             skill3.setText(s.getSkill3());
@@ -578,7 +575,7 @@ public class mainscreen extends javax.swing.JFrame {
 
             //qualification
             qualifications q = new qualifications();
-            c.setQual(q);
+            q = c.getQual();
             univname.setText(q.getUnivname());
             q1.setText(q.getQ1());
             q2.setText(q.getQ2());
@@ -587,7 +584,7 @@ public class mainscreen extends javax.swing.JFrame {
             BufferedImage image = ImageIO.read(in);
             System.out.println(in);
             imagelabel.setIcon((Icon) image);
-        } catch (Exception ex) {
+        } catch (IOException | NumberFormatException ex) {
             ex.printStackTrace();
         }
     }                                  
