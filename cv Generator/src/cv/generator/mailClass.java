@@ -47,9 +47,7 @@ public class mailClass {
             message.setSubject("Your Password for CV Generator");
             BodyPart messageBodyPart = new MimeBodyPart();
 
-            messageBodyPart.setText("Your password is ");
-            messageBodyPart.setText(t.getPassword());
-            messageBodyPart.setText("Thank You! for using CV genretaor!");
+            messageBodyPart.setText("Your password is " + t.getPassword() + " Thank You! for using CV genretaor!");
             // Create a multipar message
             Multipart multipart = new MimeMultipart();
 
@@ -104,7 +102,7 @@ public class mailClass {
             BodyPart messageBodyPart = new MimeBodyPart();
 
             // Fill the message
-            messageBodyPart.setText("Here is your CV! please find the attachment enclosed!");
+            messageBodyPart.setText("Here is your CV! Please find the attachment enclosed!");
 
             // Create a multipar message
             Multipart multipart = new MimeMultipart();
