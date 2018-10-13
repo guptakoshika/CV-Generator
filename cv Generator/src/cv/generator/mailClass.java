@@ -44,10 +44,11 @@ public class mailClass {
 
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("You Password");
+            message.setSubject("Your Password for CV Generator");
             BodyPart messageBodyPart = new MimeBodyPart();
 
-            messageBodyPart.setText("Your password is "+t.getPassword());
+            messageBodyPart.setText("Your password is ");
+            messageBodyPart.setText(t.getPassword());
             messageBodyPart.setText("Thank You! for using CV genretaor!");
             // Create a multipar message
             Multipart multipart = new MimeMultipart();
@@ -59,13 +60,12 @@ public class mailClass {
             Transport.send(message);
             System.out.println("Sent message successfully....");
             return 1;
-        } catch (Exception ex) {
+        } catch (MessagingException ex) {
             ex.printStackTrace();
         }
         return 0;
-   
     }
-    int sendpdf(cv t) {
+    int sendpdf(cv t , String pdfPath) {
         try {
             String to = t.getEmail();
 
@@ -112,7 +112,7 @@ public class mailClass {
             // Set text message part
             multipart.addBodyPart(messageBodyPart);
             messageBodyPart = new MimeBodyPart();
-            String filename = "C:\\Users\\Koshika Gupta\\Desktop\\java\\" + t.getFname() + ".pdf";
+            String filename = pdfPath;
             String filename1 = t.getFname();
             DataSource source = new FileDataSource(filename);
             messageBodyPart.setDataHandler(new DataHandler(source));
@@ -126,7 +126,7 @@ public class mailClass {
             Transport.send(message);
             System.out.println("Sent message successfully....");
             return 1;
-        } catch (Exception ex) {
+        } catch (MessagingException ex) {
             ex.printStackTrace();
         }
         return 0;
