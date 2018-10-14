@@ -1,5 +1,7 @@
 package cv.generator;
 
+import Entity.cv;
+import Entity.userdata;
 import java.util.Properties;
 import javax.activation.*;
 import javax.mail.PasswordAuthentication;
@@ -8,7 +10,7 @@ import javax.mail.internet.*;
 
 public class mailClass {
  
-    int sendpassword(userdata t)
+    boolean sendpassword(userdata t)
     {
          try {
             String to = t.getEmailid();
@@ -57,13 +59,13 @@ public class mailClass {
             message.setContent(multipart);
             Transport.send(message);
             System.out.println("Sent message successfully....");
-            return 1;
+            return true;
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }
-        return 0;
+        return false;
     }
-    int sendpdf(cv t , String pdfPath) {
+    boolean sendpdf(cv t , String pdfPath) {
         try {
             String to = t.getEmail();
 
@@ -123,10 +125,10 @@ public class mailClass {
             // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
-            return 1;
+            return true;
         } catch (MessagingException ex) {
-            ex.printStackTrace();
+          ex.printStackTrace();  
         }
-        return 0;
+        return false;
     }
 }
