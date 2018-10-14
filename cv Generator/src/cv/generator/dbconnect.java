@@ -1,31 +1,29 @@
 package cv.generator;
 
+import Entity.*;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
 public class dbconnect {
 
-    void savedata(cv c) {
+    public Session getSessioObj(){
         Configuration cfg = new Configuration();
         cfg.configure();
         SessionFactory sessionfac = cfg.buildSessionFactory();
         Session s = sessionfac.openSession();
+        return s;
+    }
+    void savedata(cv c) {
+        Session s = getSessioObj();
         Transaction t = s.beginTransaction();
         s.save(c);
         t.commit();
         s.close();
-        sessionfac.close();
-    }
+     }
 
     cv fetch(int n) {
-        Configuration cfg = new Configuration();
-        cfg.configure();
-        SessionFactory s = cfg.buildSessionFactory();
-        Session session = s.openSession();
+        Session session = getSessioObj();
 
         Transaction tx = session.beginTransaction();
         Query q = session.createQuery("from cv");
@@ -36,34 +34,40 @@ public class dbconnect {
     }
 
     void saveuserinfo(userdata u) {
-        Configuration cfg = new Configuration();
-        cfg.configure();
-        SessionFactory sessionfac = cfg.buildSessionFactory();
-        Session s = sessionfac.openSession();
+        Session s = getSessioObj();
         Transaction t = s.beginTransaction();
         s.save(u);
         t.commit();
         s.close();
-        sessionfac.close();
     }
 
-    int fetchdata(String email, String password) {
-        System.out.println(email);
-        Configuration cfg = new Configuration();
-        cfg.configure();
-        SessionFactory sessionfac = cfg.buildSessionFactory();
-        Session s = sessionfac.openSession();
+    boolean fetchdata(String email, String password) {
+        Session s = getSessioObj();
         Transaction t = s.beginTransaction();
+        
         Query q = s.createQuery("from userdata");
         Object k = s.createCriteria(email);
         List<userdata> list = q.list();
 
         for (userdata data : list) {
-            if (data.getEmailid().equals(email) && data.getPassword().equals(password) ) {
-                System.out.println(data.getEmailid());
-                return 1;
+            if (data.getEmailid().equals(email) && data.getPassword().equals(password) ){ 
+                return true;
             }
         }
-        return 0;
+        return false;
+    }
+    boolean forgetpassword(String email)
+    {
+        Session session = getSessioObj();
+        Transaction tx = session.beginTransaction();
+        Query q = session.createQuery("from userdata");
+        Object k = session.createCriteria(email);
+        List <userdata> password = q.list();
+        for(userdata  list : password)
+        {
+            mailClass m = new mailClass();
+             return m.sendpassword(list);
+        }
+        return false;
     }
 }
