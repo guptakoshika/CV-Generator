@@ -65,6 +65,11 @@ public class login extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Forget Password?");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cv/generator/246x0w.jpg"))); // NOI18N
 
@@ -99,7 +104,6 @@ public class login extends javax.swing.JFrame {
                                         .addComponent(emailid, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel6)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(map, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -142,8 +146,8 @@ public class login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         dbconnect d = new dbconnect();
-        int r = d.fetchdata(emailid.getText(), password.getText());
-        if (r == 1) {
+        boolean r = d.fetchdata(emailid.getText(), password.getText());
+        if (r) {
             super.dispose();
             new mainscreen().setVisible(true);
         } else {
@@ -164,6 +168,11 @@ public class login extends javax.swing.JFrame {
     private void emailidActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
     }                                       
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        new forgetpassword().setVisible(true);
+        super.dispose();
+    }                                    
 
     // Variables declaration - do not modify                     
     private javax.swing.JTextField emailid;
