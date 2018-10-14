@@ -1,6 +1,9 @@
 package cv.generator;
 
-import Screens.workexperience;
+import Entity.cv;
+import Entity.qualifications;
+import Entity.skills;
+import Entity.workexperience;
 import ae.java.awt.image.BufferedImage;
 import ae.javax.imageio.ImageIO;
 import java.awt.*;
@@ -462,8 +465,8 @@ public class mainscreen extends javax.swing.JFrame {
         String pdfpath = f.getAbsolutePath();
         cv o = getdata();
         PdfGenerator c =  new PdfGenerator();
-        int r = c.createpdf(o, imagepath, pdfpath);
-        if (r == 1) {
+        boolean r = c.createpdf(o, imagepath, pdfpath);
+        if (r) {
             JOptionPane.showMessageDialog(
                     null, "Pdf created and mailed it you successfully!\n" + "pdf is created at location"
                     + pdfpath + "mail is sent to" + o.getEmail());
