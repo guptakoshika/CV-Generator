@@ -1,27 +1,32 @@
 package cv.generator;
 
-import Screens.workexperience;
+import Entity.cv;
+import Entity.qualifications;
+import Entity.skills;
+import Entity.workexperience;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.FileOutputStream;
 
+
 public class PdfGenerator {
 
-    int createpdf(cv t, String imagepath, String pdfpath) {
+    boolean createpdf(cv t, String imagepath, String pdfpath) {
         Document mydoc = new Document();
         try {
+             String respath = pdfpath + "\\" + t.getFname() + ".pdf";
+             System.out.println(respath);
+            PdfWriter.getInstance(mydoc, new FileOutputStream(respath));
 
-            PdfWriter.getInstance(mydoc, new FileOutputStream(pdfpath + t.getFname() + ".pdf"));
-
-            Font font = new Font(Font.FontFamily.HELVETICA, 27, Font.BOLD);
+            Font font = new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD);
             mydoc.open();
             Image image = Image.getInstance(imagepath);
-            image.setAbsolutePosition(300f, 550f);
+            image.setAbsolutePosition(500f, 850f);
             mydoc.add(new Paragraph("----------------------------------------------------------------------------------------------"));
             mydoc.add(new Paragraph("PERSONAL INFORMATION", font));
             mydoc.add(new Paragraph("------------------------------------------------------------------------------------------------"));
 
-            mydoc.add(new Paragraph(t.getFname() + t.getSname()));
+            mydoc.add(new Paragraph(t.getFname() +" " +  t.getSname()));
             mydoc.add(new Paragraph(t.getContact()));
             mydoc.add(new Paragraph(t.getEmail()));
             mydoc.add(new Paragraph(t.getAdress1()));
@@ -68,11 +73,11 @@ public class PdfGenerator {
             mydoc.close();
             System.out.println("done! pdf created");
             mailClass m = new mailClass();
-            int r = m.sendpdf(t);
+            boolean r = m.sendpdf(t,respath);
             return r;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
 }
