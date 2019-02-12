@@ -9,6 +9,7 @@
     <property name="hibernate.connection.password">koshika</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping class="cv.generator.cv"/>
+    <mapping class="Entity.cv"/>
+    <mapping class="Entity.userdata"/>
   </session-factory>
 </hibernate-configuration>
